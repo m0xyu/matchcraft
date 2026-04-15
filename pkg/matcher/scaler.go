@@ -29,20 +29,20 @@ func NewScaler(targets []Matchable) *Scaler {
 func (s *Scaler) Transform(attrs map[string]float64) map[string]float64 {
 	scaled := make(map[string]float64)
 	for attr, val := range attrs {
-		min, okMin := s.Min[attr]
-		max, okMax := s.Max[attr]
+		vMin, okMin := s.Min[attr]
+		vMax, okMax := s.Max[attr]
 
 		// 対象データに存在しない属性は無視する（スケーリングできないため）
 		if !okMin || !okMax {
 			continue
 		}
 
-		if max-min == 0 {
+		if vMax-vMin == 0 {
 			// 全て同じ値の場合はスケーリングできないので、0
 			scaled[attr] = 0
 		} else {
 			// 範囲外の値が来ても 0.0〜1.0 に収まるようにスケーリング
-			res := (val - min) / (max - min)
+			res := (val - vMin) / (vMax - vMin)
 			if res < 0 {
 				res = 0
 			}

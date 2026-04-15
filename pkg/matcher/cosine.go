@@ -4,9 +4,9 @@ import "math"
 
 type CosineCalculator struct{}
 
-func (c *CosineCalculator) Calculate(user, target map[string]float64) (float64, map[string]float64) {
+func (c *CosineCalculator) Calculate(user, target map[string]float64) (score float64, contribution map[string]float64) {
 	var dotProduct, normUser, normTarget float64
-	contribution := make(map[string]float64)
+	contribution = make(map[string]float64)
 
 	for key, uVal := range user {
 		tVal := target[key]
@@ -23,7 +23,7 @@ func (c *CosineCalculator) Calculate(user, target map[string]float64) (float64, 
 	}
 
 	// コサイン類似度 = (A・B) / (|A|*|B|)
-	score := dotProduct / (math.Sqrt(normUser) * math.Sqrt(normTarget))
+	score = dotProduct / (math.Sqrt(normUser) * math.Sqrt(normTarget))
 
 	// 寄与度を正規化
 	for key := range contribution {

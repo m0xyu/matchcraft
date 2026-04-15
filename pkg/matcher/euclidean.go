@@ -4,7 +4,7 @@ import "math"
 
 type EuclideanCalculator struct{}
 
-func (c *EuclideanCalculator) Calculate(user, target map[string]float64) (float64, map[string]float64) {
+func (c *EuclideanCalculator) Calculate(user, target map[string]float64) (score float64, contribution map[string]float64) {
 	var totalDist float64
 	diffs := make(map[string]float64)
 
@@ -21,7 +21,7 @@ func (c *EuclideanCalculator) Calculate(user, target map[string]float64) (float6
 	finalScore := 1.0 / (1.0 + math.Sqrt(totalDist))
 
 	// 寄与度の計算（どの属性がマッチを邪魔しなかったか）
-	contribution := make(map[string]float64)
+	contribution = make(map[string]float64)
 	if totalDist == 0 {
 		for key := range user {
 			contribution[key] = 1.0 / float64(len(user))

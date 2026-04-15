@@ -16,6 +16,7 @@ func (c CoffeeBean) GetID() string                     { return c.Name }
 func (c CoffeeBean) GetAttributes() map[string]float64 { return c.Flavor }
 
 func main() {
+	//nolint:gocritic
 	// targets := []matcher.Matchable{
 	// 	CoffeeBean{"イタリアンロースト", map[string]float64{"bitter": 10, "acid": 1, "aroma": 5}},
 	// 	CoffeeBean{"エチオピア・シダモ", map[string]float64{"bitter": 2, "acid": 9, "aroma": 10}},
