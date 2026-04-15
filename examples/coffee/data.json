@@ -1,0 +1,14 @@
+[
+  {
+    "id": "エチオピア・シダモ",
+    "attributes": { "bitter": 2, "acid": 9, "aroma": 10, "body": 4 }
+  },
+  {
+    "id": "イタリアンロースト",
+    "attributes": { "bitter": 10, "acid": 1, "aroma": 6, "body": 9 }
+  },
+  {
+    "id": "ブラジル・サントス",
+    "attributes": { "bitter": 5, "acid": 5, "aroma": 7, "body": 6 }
+  }
+]

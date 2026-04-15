@@ -1,0 +1,34 @@
+# バイナリおよび実行ファイル
+# プロジェクト名や example の実行ファイル名を追加します
+matchcraft
+main
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# テスト関連
+# カバレッジレポートや一時的なテストバイナリを除外します
+*.test
+*.out
+cover.out
+
+# 環境変数と機密情報
+# .copilotignore に記載されていた項目に基づきます
+.env
+.env.*
+secrets/
+certs/
+*.pem
+*.key
+
+# IDE・エディタ固有のファイル
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db

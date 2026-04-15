@@ -1,0 +1,56 @@
+package matcher
+
+type Scaler struct {
+	Min map[string]float64
+	Max map[string]float64
+}
+
+// NewScaler は全対象データから属性ごとの最小・最大値を割り出す
+func NewScaler(targets []Matchable) *Scaler {
+	s := &Scaler{
+		Min: make(map[string]float64),
+		Max: make(map[string]float64),
+	}
+
+	for _, t := range targets {
+		for attr, val := range t.GetAttributes() {
+			if currMin, ok := s.Min[attr]; !ok || val < currMin {
+				s.Min[attr] = val
+			}
+			if currMax, ok := s.Max[attr]; !ok || val > currMax {
+				s.Max[attr] = val
+			}
+		}
+	}
+	return s
+}
+
+// 対象データを、属性ごとに0.0〜1.0の範囲にスケーリングします
+func (s *Scaler) Transform(attrs map[string]float64) map[string]float64 {
+	scaled := make(map[string]float64)
+	for attr, val := range attrs {
+		min, okMin := s.Min[attr]
+		max, okMax := s.Max[attr]
+
+		// 対象データに存在しない属性は無視する（スケーリングできないため）
+		if !okMin || !okMax {
+			continue
+		}
+
+		if max-min == 0 {
+			// 全て同じ値の場合はスケーリングできないので、0
+			scaled[attr] = 0
+		} else {
+			// 範囲外の値が来ても 0.0〜1.0 に収まるようにスケーリング
+			res := (val - min) / (max - min)
+			if res < 0 {
+				res = 0
+			}
+			if res > 1 {
+				res = 1
+			}
+			scaled[attr] = res
+		}
+	}
+	return scaled
+}
