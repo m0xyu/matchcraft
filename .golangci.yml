@@ -1,4 +1,5 @@
-version: '2' # 修正：数値ではなく "文字列" で書く必要があります
+# v2系では文字列での指定が推奨されます
+version: '2'
 
 run:
     go: '1.24'
@@ -8,33 +9,36 @@ run:
 linters:
     enable:
         - gocritic
-        - revive
         - misspell
+        - revive
         - errcheck
         - staticcheck
 
-settings:
-    gocritic:
-        enabled-tags:
-            - diagnostic
-            - experimental
-            - opinionated
-            - performance
-            - style
-    revive:
-        rules:
-            - name: exported
-              disabled: true
-            - name: package-comments
-              disabled: true
+    settings:
+        gocritic:
+            enabled-tags:
+                - diagnostic
+                - experimental
+                - opinionated
+                - performance
+                - style
+        revive:
+            rules:
+                - name: exported
+                  disabled: true
+                - name: package-comments
+                  disabled: true
+        errcheck:
+            check-type-assertions: true
 
 issues:
-    exclude:
-        - path: _test\.go
-          linters:
-              - gocritic
-        - path: examples/
-          linters:
-              - revive
-        - text: 'commentedOutCode'
-          path: examples/
+    exclusions:
+        presets:
+            - comments
+        paths:
+            - examples$
+            - _test\.go$
+
+# 必要に応じて出力形式を指定
+output:
+    sort-results: true
