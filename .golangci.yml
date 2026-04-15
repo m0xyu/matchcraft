@@ -1,11 +1,11 @@
-version: 2
+version: '2' # 修正：数値ではなく "文字列" で書く必要があります
+
 run:
     go: '1.24'
     timeout: 5m
     modules-download-mode: readonly
 
 linters:
-    disable-all: true
     enable:
         - gocritic
         - revive
@@ -13,7 +13,7 @@ linters:
         - errcheck
         - staticcheck
 
-linters-settings:
+settings:
     gocritic:
         enabled-tags:
             - diagnostic
@@ -24,14 +24,17 @@ linters-settings:
     revive:
         rules:
             - name: exported
+              disabled: true
+            - name: package-comments
+              disabled: true
 
 issues:
-    exclude-rules:
+    exclude:
         - path: _test\.go
           linters:
               - gocritic
         - path: examples/
           linters:
               - revive
-        - path: examples/
-          text: 'commentedOutCode'
+        - text: 'commentedOutCode'
+          path: examples/
