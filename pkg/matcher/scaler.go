@@ -1,11 +1,12 @@
 package matcher
 
+// Scaler is responsible for scaling attributes to a range of 0.0 to 1.0 based on target data.
 type Scaler struct {
 	Min map[string]float64
 	Max map[string]float64
 }
 
-// NewScaler は全対象データから属性ごとの最小・最大値を割り出す
+// NewScaler calculates the minimum and maximum values for each attribute from the target data.
 func NewScaler(targets []Matchable) *Scaler {
 	s := &Scaler{
 		Min: make(map[string]float64),
@@ -25,7 +26,7 @@ func NewScaler(targets []Matchable) *Scaler {
 	return s
 }
 
-// 対象データを、属性ごとに0.0〜1.0の範囲にスケーリングします
+// Transform scales the given attributes to a range of 0.0 to 1.0 based on target data.
 func (s *Scaler) Transform(attrs map[string]float64) map[string]float64 {
 	scaled := make(map[string]float64)
 	for attr, val := range attrs {

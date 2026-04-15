@@ -2,8 +2,10 @@ package matcher
 
 import "math"
 
+// EuclideanCalculator implements a matching strategy based on Euclidean distance.
 type EuclideanCalculator struct{}
 
+// Calculate computes the similarity score using the Euclidean distance formula.
 func (c *EuclideanCalculator) Calculate(user, target map[string]float64) (score float64, contribution map[string]float64) {
 	var totalDist float64
 	diffs := make(map[string]float64)
