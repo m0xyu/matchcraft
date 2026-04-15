@@ -2,7 +2,6 @@
 version: '2'
 
 run:
-    go: '1.24'
     timeout: 5m
     modules-download-mode: readonly
 
@@ -32,6 +31,13 @@ linters:
             check-type-assertions: true
 
 issues:
+    new: true
+    new-from-merge-base: main
+    whole-files: true
+
+    max-issues-per-linter: 0
+    max-same-issues: 0
+
     exclusions:
         presets:
             - comments
