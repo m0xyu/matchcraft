@@ -1,8 +1,9 @@
 package matcher
 
+// Option defines a functional option for configuring the matching engine.
 type Option func(*Engine)
 
-// WithCalculator は計算アルゴリズムを指定するためのオプション
+// WithCalculator specifies the calculation algorithm to use.
 func WithCalculator(c Calculator) Option {
 	return func(e *Engine) {
 		e.calculator = c

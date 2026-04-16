@@ -1,3 +1,4 @@
+// Package main is an entry point for the coffee recommendation example.
 package main
 
 import (

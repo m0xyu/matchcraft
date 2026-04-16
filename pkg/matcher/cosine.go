@@ -1,9 +1,12 @@
+// Package matcher provides various algorithms to match datasets based on similarity.
 package matcher
 
 import "math"
 
+// CosineCalculator implements the Calculator interface using cosine similarity.
 type CosineCalculator struct{}
 
+// Calculate computes the cosine similarity score between user and target attributes.
 func (c *CosineCalculator) Calculate(user, target map[string]float64) (score float64, contribution map[string]float64) {
 	var dotProduct, normUser, normTarget float64
 	contribution = make(map[string]float64)

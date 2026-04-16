@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+// Engine is the core matching engine that handles scaling and score calculation.
 type Engine struct {
 	targets       []Matchable
 	calculator    Calculator
@@ -12,6 +13,7 @@ type Engine struct {
 	cachedTargets []map[string]float64
 }
 
+// NewEngine initializes a new matching engine with the provided targets and options.
 func NewEngine(targets []Matchable, opts ...Option) *Engine {
 	e := &Engine{
 		targets:    targets,

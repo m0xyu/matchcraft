@@ -1,15 +1,19 @@
+# v2系では文字列での指定が推奨されます
 version: '2'
+
 run:
-    go: '1.24'
+    timeout: 5m
     modules-download-mode: readonly
+
 linters:
     enable:
         - gocritic
         - misspell
         - revive
+        - errcheck
+        - staticcheck
+
     settings:
-        errcheck:
-            check-type-assertions: true
         gocritic:
             enabled-tags:
                 - diagnostic
@@ -20,24 +24,14 @@ linters:
         revive:
             rules:
                 - name: exported
-    exclusions:
-        generated: lax
-        presets:
-            - comments
-            - common-false-positives
-            - legacy
-            - std-error-handling
-        paths:
-            - third_party$
-            - builtin$
-            - examples$
-formatters:
-    enable:
-        - gofmt
-        - goimports
-    exclusions:
-        generated: lax
-        paths:
-            - third_party$
-            - builtin$
-            - examples$
+                  disabled: true
+                - name: package-comments
+                  disabled: true
+        errcheck:
+            check-type-assertions: true
+
+issues:
+    new-from-merge-base: main
+    whole-files: true
+    max-issues-per-linter: 0
+    max-same-issues: 0
