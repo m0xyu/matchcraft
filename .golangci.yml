@@ -31,20 +31,7 @@ linters:
             check-type-assertions: true
 
 issues:
-    new: true
     new-from-merge-base: main
     whole-files: true
-
     max-issues-per-linter: 0
     max-same-issues: 0
-
-    exclusions:
-        presets:
-            - comments
-        paths:
-            - examples$
-            - _test\.go$
-
-# 必要に応じて出力形式を指定
-output:
-    sort-results: true
